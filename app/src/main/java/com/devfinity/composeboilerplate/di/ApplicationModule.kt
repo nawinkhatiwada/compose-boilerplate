@@ -1,0 +1,48 @@
+package com.devfinity.composeboilerplate.di
+
+import android.app.Application
+import android.content.Context
+import com.devfinity.composeboilerplate.persistance.db.DatabaseManager
+import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefsRepository
+import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefsRepositoryImpl
+import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefManager
+import com.devfinity.composeboilerplate.utils.stringprovider.StringProvider
+import com.devfinity.composeboilerplate.utils.stringprovider.StringProviderImpl
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@InstallIn(SingletonComponent::class)
+@Module(
+    includes = [
+        AuthModule::class
+    ]
+)
+class ApplicationModule {
+    @Provides
+    fun provideContext(application: Application): Context = application
+
+    @Provides
+    fun provideSharedPreference(context: Context): SharedPrefManager {
+        return SharedPrefManager(context)
+    }
+
+    @Provides
+    fun provideSharePrefsRepository(prefManager: SharedPrefManager): SharedPrefsRepository {
+        return SharedPrefsRepositoryImpl(prefManager)
+    }
+
+    @Provides
+    @Singleton
+    fun provideStringProvider(@ApplicationContext context: Context): StringProvider {
+        return StringProviderImpl(context)
+    }
+
+    @Provides
+    fun provideDatabaseManager(context: Context): DatabaseManager {
+        return DatabaseManager(context)
+    }
+}
