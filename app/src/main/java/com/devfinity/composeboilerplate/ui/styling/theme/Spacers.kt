@@ -8,11 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/**
- * Created by Sujan Rai
- * on 12/21/2023
- */
-
 @Composable
 fun VerticalSpacer(value: Dp) {
     Spacer(modifier = Modifier.height(value))

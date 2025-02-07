@@ -6,8 +6,8 @@ import com.devfinity.composeboilerplate.persistance.db.DatabaseManager
 import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefsRepository
 import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefsRepositoryImpl
 import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefManager
-import com.devfinity.composeboilerplate.utils.stringprovider.StringProvider
-import com.devfinity.composeboilerplate.utils.stringprovider.StringProviderImpl
+import com.devfinity.composeboilerplate.utils.helper.stringprovider.StringProvider
+import com.devfinity.composeboilerplate.utils.helper.stringprovider.StringProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

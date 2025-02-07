@@ -1,4 +1,4 @@
-package com.devfinity.composeboilerplate.ui.components
+package com.devfinity.composeboilerplate.ui.composables
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.border
