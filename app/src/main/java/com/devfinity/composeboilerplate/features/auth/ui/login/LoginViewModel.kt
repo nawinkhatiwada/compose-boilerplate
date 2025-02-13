@@ -3,7 +3,8 @@ package com.devfinity.composeboilerplate.features.auth.ui.login
 import androidx.lifecycle.viewModelScope
 import com.devfinity.composeboilerplate.base.BaseViewModel
 import com.devfinity.composeboilerplate.features.auth.data.AuthRepository
-import com.devfinity.composeboilerplate.utils.stringprovider.StringProvider
+import com.devfinity.composeboilerplate.routes.Screen
+import com.devfinity.composeboilerplate.utils.helper.stringprovider.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,31 +17,31 @@ class LoginViewModel @Inject constructor(
 
     fun login() {
         viewModelScope.launch {
-            updateUiState(
-                uiState = uiState.value.copy(
-                    isLoading = true,
-                    errorMessage = null,
-                    data = null
-                )
-            )
+            startLoading()
             try {
                 val response = repository.login()
-                updateUiState(
-                    uiState = uiState.value.copy(
-                        isLoading = false,
-                        data = response
-                    )
-                )
+                setSuccess(response)
             } catch (e: Exception) {
-                e.printStackTrace()
+                setError(e)
+            }
+        }
+    }
+
+    fun onTriggeredLoginEvent(event: LoginUiEvent) {
+        when (event) {
+            is LoginUiEvent.OnForgotPasswordClicked -> {
                 updateUiState(
                     uiState = uiState.value.copy(
-                        isLoading = false,
-                        errorMessage = e.message,
-                        data = null
+                        navigateTo = Screen.ForgotPassword(id = event.id, title = event.title)
                     )
                 )
             }
         }
     }
+}
+
+sealed class LoginUiEvent {
+    data class OnForgotPasswordClicked(
+        val id: Int, val title: String
+    ) : LoginUiEvent()
 }

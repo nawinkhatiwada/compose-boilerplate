@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.android.ksp)
     alias(libs.plugins.dagger.android)
+    alias(libs.plugins.kotlin.serialization)
 }
 val versionMajor = 1
 val versionMinor = 0
@@ -75,7 +76,8 @@ dependencies {
     implementation(libs.squareup.retrofit2.retrofit)
     implementation(libs.squareup.retrofit2.convertor.gson)
     implementation(libs.core.splashscreen)
-
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
 
     testImplementation(libs.junit)

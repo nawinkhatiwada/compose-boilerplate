@@ -1,4 +1,4 @@
-package com.devfinity.composeboilerplate.ui.components
+package com.devfinity.composeboilerplate.ui.composables
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.border
@@ -72,34 +72,35 @@ fun LabelTextField(
     val errorTextStyle = styleData?.errorTextStyle ?: TextStyle.Default
     val hintTextStyle = styleData?.hintTextStyle ?: TextStyle.Default
 
-    val keyboardActions = KeyboardActions(
-        onDone = {
-            onImeDoneClicked()
-        }
-    )
+    val keyboardActions = KeyboardActions(onDone = {
+        onImeDoneClicked()
+    })
 
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused = interactionSource.collectIsFocusedAsState()
 
     Column(
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         if (labelText != null) {
 
             Row(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
             ) {
                 Text(
                     text = labelText,
                     style = labelTextStyle,
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                if(isRequired) {
+                if (isRequired) {
                     Text(
-                        modifier = Modifier.align(Alignment.CenterVertically).padding(top = 4.dp),
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(top = 4.dp),
                         text = "*",
                         style = labelTextStyle,
                     )
@@ -107,24 +108,21 @@ fun LabelTextField(
             }
         }
         val enableFocusBorderColor = textInputData.enableFocusBorderColor
-        BasicTextField(
-            modifier = Modifier
-                .clickable(enabled = clickable) { onTextFieldClicked() }
-                .focusable(isEnabled)
-                .border(
-                    1.dp,
-                    if (enableFocusBorderColor) {
-                        if (errorText.isNullOrEmpty()) {
-                            if (isFocused.value) focusedBorderColor else defaultBorderColor
-                        } else {
-                            errorBorderColor
-                        }
+        BasicTextField(modifier = Modifier
+            .clickable(enabled = clickable) { onTextFieldClicked() }
+            .focusable(isEnabled)
+            .border(
+                1.dp, if (enableFocusBorderColor) {
+                    if (errorText.isNullOrEmpty()) {
+                        if (isFocused.value) focusedBorderColor else defaultBorderColor
                     } else {
-                        defaultBorderColor
-                    },
-                    shape
-                )
-                .padding(horizontal = 0.dp),
+                        errorBorderColor
+                    }
+                } else {
+                    defaultBorderColor
+                }, shape
+            )
+            .padding(horizontal = 0.dp),
             value = inputText,
             onValueChange = { onTextChanged(it) },
             keyboardOptions = keyboardOptions ?: KeyboardOptions.Default.copy(
@@ -138,16 +136,16 @@ fun LabelTextField(
 
             decorationBox = { innerTextField ->
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(40.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(40.dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         iconData?.leadingIcon?.let {
-                            IconButton(
-                                onClick = { iconData.onLeadingIconClicked.invoke() }
-                            ) {
+                            IconButton(onClick = { iconData.onLeadingIconClicked.invoke() }) {
                                 Icon(
                                     painter = painterResource(id = it),
                                     contentDescription = "Leading Icon",
@@ -165,13 +163,11 @@ fun LabelTextField(
                                         0.dp
                                     } else {
                                         12.dp
-                                    },
-                                    bottom = if (iconData?.leadingIcon != null) {
+                                    }, bottom = if (iconData?.leadingIcon != null) {
                                         0.dp
                                     } else {
                                         12.dp
-                                    },
-                                    start = if (iconData?.leadingIcon != null) {
+                                    }, start = if (iconData?.leadingIcon != null) {
                                         0.dp
                                     } else {
                                         16.dp
@@ -189,9 +185,7 @@ fun LabelTextField(
                         }
 
                         iconData?.trailingIcon?.let {
-                            IconButton(
-                                onClick = { iconData.onTrailingIconClicked.invoke() }
-                            ) {
+                            IconButton(onClick = { iconData.onTrailingIconClicked.invoke() }) {
                                 Icon(
                                     painter = painterResource(id = it),
                                     contentDescription = "Trailing Icon",
@@ -201,8 +195,7 @@ fun LabelTextField(
                         }
                     }
                 }
-            }
-        )
+            })
 
         if (!errorText.isNullOrEmpty()) {
             Text(
@@ -266,13 +259,11 @@ fun LabelTextFieldPreview() {
             errorText = "Error message",
             isRequired = true
         ),
-        iconData = TextInputFieldIconData(
-            leadingIcon = android.R.drawable.ic_menu_add,
+        iconData = TextInputFieldIconData(leadingIcon = android.R.drawable.ic_menu_add,
             trailingIcon = android.R.drawable.ic_menu_search,
             leadingIconTint = null,
             onLeadingIconClicked = { /* Add action for leading icon click */ },
-            onTrailingIconClicked = { /* Add action for trailing icon click */ }
-        ),
+            onTrailingIconClicked = { /* Add action for trailing icon click */ }),
         colorData = TextInputColorData(
             focusedBorderColor = Color.Blue,
             disabledTextColor = Color.Gray,

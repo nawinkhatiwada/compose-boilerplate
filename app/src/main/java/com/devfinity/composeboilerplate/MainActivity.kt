@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,12 +20,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.devfinity.composeboilerplate.ui.components.LabelTextField
-import com.devfinity.composeboilerplate.ui.components.TextInputColorData
-import com.devfinity.composeboilerplate.ui.components.TextInputData
-import com.devfinity.composeboilerplate.ui.components.TextInputFieldIconData
-import com.devfinity.composeboilerplate.ui.components.TextInputFieldStyleData
-import com.devfinity.composeboilerplate.ui.styling.theme.ComposeboilerplateTheme
+import androidx.navigation.compose.rememberNavController
+import com.devfinity.composeboilerplate.routes.MainNavGraph
+import com.devfinity.composeboilerplate.routes.Screen
+import com.devfinity.composeboilerplate.ui.composables.LabelTextField
+import com.devfinity.composeboilerplate.ui.composables.TextInputColorData
+import com.devfinity.composeboilerplate.ui.composables.TextInputData
+import com.devfinity.composeboilerplate.ui.composables.TextInputFieldIconData
+import com.devfinity.composeboilerplate.ui.composables.TextInputFieldStyleData
+import com.devfinity.composeboilerplate.ui.styling.theme.ComposeBoilerplateTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,12 +38,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ComposeboilerplateTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TextInputExample(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            ComposeBoilerplateTheme {
+                val navController = rememberNavController()
+                MainNavGraph(
+                    navController = navController,
+                    startDestination = Screen.Login
+                )
             }
         }
     }
@@ -124,7 +126,7 @@ fun TextInputExample(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    ComposeboilerplateTheme {
+    ComposeBoilerplateTheme {
         TextInputExample()
     }
 }

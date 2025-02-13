@@ -1,4 +1,4 @@
-package com.devfinity.composeboilerplate.utils.stringprovider
+package com.devfinity.composeboilerplate.utils.helper.stringprovider
 
 import android.content.Context
 import androidx.annotation.StringRes

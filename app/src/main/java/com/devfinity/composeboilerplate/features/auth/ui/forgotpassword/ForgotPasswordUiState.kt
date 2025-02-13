@@ -1,9 +1,11 @@
-package com.devfinity.composeboilerplate.features.auth.ui.login
+package com.devfinity.composeboilerplate.features.auth.ui.forgotpassword
 
 import com.devfinity.composeboilerplate.base.BaseUiState
 import com.devfinity.composeboilerplate.routes.Screen
 
-data class LoginUiState(
+data class ForgotPasswordUiState(
+    var id: Int? = null,
+    var title: String? = null,
     override var isLoading: Boolean? = null,
     override var data: Any? = null,
     override var hasError: Boolean? = null,
