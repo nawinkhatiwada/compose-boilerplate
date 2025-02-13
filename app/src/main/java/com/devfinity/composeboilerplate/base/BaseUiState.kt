@@ -2,7 +2,7 @@ package com.devfinity.composeboilerplate.base
 
 import com.devfinity.composeboilerplate.routes.Screen
 
-interface Navigator {
+interface BaseUiState {
     var isLoading: Boolean?
     var data: Any?
     var hasError: Boolean?

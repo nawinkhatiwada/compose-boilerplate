@@ -2,12 +2,12 @@ package com.devfinity.composeboilerplate.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import com.devfinity.composeboilerplate.base.Navigator
+import com.devfinity.composeboilerplate.base.BaseUiState
 import com.devfinity.composeboilerplate.routes.Screen
 
 @Composable
 fun DisposableLaunchEffectNavigator(
-    value: Navigator?,
+    value: BaseUiState?,
     onTriggerAction: (Screen) -> Unit
 ) {
     DisposableEffect(value) {

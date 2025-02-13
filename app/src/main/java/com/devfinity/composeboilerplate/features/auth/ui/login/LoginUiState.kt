@@ -1,6 +1,6 @@
 package com.devfinity.composeboilerplate.features.auth.ui.login
 
-import com.devfinity.composeboilerplate.base.Navigator
+import com.devfinity.composeboilerplate.base.BaseUiState
 import com.devfinity.composeboilerplate.routes.Screen
 
 data class LoginUiState(
@@ -9,4 +9,4 @@ data class LoginUiState(
     override var hasError: Boolean? = null,
     override var errorMessage: String? = null,
     override var navigateTo: Screen? = null,
-) : Navigator
+) : BaseUiState
