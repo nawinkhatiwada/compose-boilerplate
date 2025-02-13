@@ -2,7 +2,6 @@ package com.devfinity.composeboilerplate.errors
 
 import android.app.Activity
 import android.content.Context
-import androidx.fragment.app.Fragment
 import java.io.IOException
 
 class FailedResponseException(val code: Int, val errorMessage: String) : IOException()
@@ -15,10 +14,6 @@ class ResponseErrorException(val errorMessage: String) : Exception(errorMessage)
 class InvalidResponseException(val errorMessage: String) : Exception(errorMessage)
 
 fun Activity.parseError(e: Exception): String {
-    return parseException(e)
-}
-
-fun Fragment.parseError(e: Exception): String {
     return parseException(e)
 }
 

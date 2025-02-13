@@ -17,25 +17,12 @@ class LoginViewModel @Inject constructor(
 
     fun login() {
         viewModelScope.launch {
-            updateUiState(
-                uiState = uiState.value.copy(
-                    isLoading = true, errorMessage = null, data = null
-                )
-            )
+            startLoading()
             try {
                 val response = repository.login()
-                updateUiState(
-                    uiState = uiState.value.copy(
-                        isLoading = false, data = response
-                    )
-                )
+                setSuccess(response)
             } catch (e: Exception) {
-                e.printStackTrace()
-                updateUiState(
-                    uiState = uiState.value.copy(
-                        isLoading = false, errorMessage = e.message, data = null
-                    )
-                )
+                setError(e)
             }
         }
     }
