@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">compose-boilerplate</string>
+    <string name="test_toast_message">Test toast message</string>
 </resources>

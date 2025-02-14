@@ -8,4 +8,20 @@ import javax.inject.Inject
 @HiltViewModel
 class ForgotPasswordViewModel @Inject constructor(
     private val repository: AuthRepository
-) : BaseViewModel<ForgotPasswordUiState>(ForgotPasswordUiState()) {}
+) : BaseViewModel<ForgotPasswordUiState>(ForgotPasswordUiState()) {
+    private fun startLoading() {
+    }
+
+    private fun setError(e: Exception) {
+    }
+
+    private fun getSuccessState(): ForgotPasswordUiState {
+        val updatedUiState = updateUiState(
+            uiState = uiState.value.copy(
+                isLoading = false,
+                errorMessage = null,
+            )
+        )
+        return updatedUiState
+    }
+}
