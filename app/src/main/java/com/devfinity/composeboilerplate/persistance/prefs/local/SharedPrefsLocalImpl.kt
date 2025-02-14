@@ -1,14 +1,14 @@
-package com.devfinity.composeboilerplate.persistance.prefs
+package com.devfinity.composeboilerplate.persistance.prefs.local
 
-import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefManager
+import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class SharedPrefsRepositoryImpl @Inject constructor(
+class SharedPrefsLocalImpl @Inject constructor(
     private val prefs: SharedPrefManager
-) : SharedPrefsRepository {
+) : SharedPrefsLocal {
 
     override fun isUserLoggedIn(): Flow<Boolean> = prefs.isUserLoggedIn()
 

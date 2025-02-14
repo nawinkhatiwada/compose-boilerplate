@@ -1,4 +1,4 @@
-package com.devfinity.composeboilerplate.persistance.prefs.local
+package com.devfinity.composeboilerplate.persistance.prefs
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey

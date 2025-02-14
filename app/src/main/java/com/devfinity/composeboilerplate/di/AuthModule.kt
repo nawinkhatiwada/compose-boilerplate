@@ -4,7 +4,7 @@ import com.devfinity.composeboilerplate.features.auth.data.AuthRepository
 import com.devfinity.composeboilerplate.features.auth.data.AuthRepositoryImpl
 import com.devfinity.composeboilerplate.features.auth.data.local.AuthLocalImpl
 import com.devfinity.composeboilerplate.features.auth.data.remote.AuthRemoteImpl
-import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefManager
+import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefManager
 import com.devfinity.composeboilerplate.remote.ApiService
 import dagger.Module
 import dagger.Provides

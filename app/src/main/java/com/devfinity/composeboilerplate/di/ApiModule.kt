@@ -1,7 +1,7 @@
 package com.devfinity.composeboilerplate.di
 
 import com.devfinity.composeboilerplate.BuildConfig
-import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefManager
+import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefManager
 import com.devfinity.composeboilerplate.remote.ApiService
 import com.devfinity.composeboilerplate.remote.NetworkInterceptor
 import com.google.gson.Gson

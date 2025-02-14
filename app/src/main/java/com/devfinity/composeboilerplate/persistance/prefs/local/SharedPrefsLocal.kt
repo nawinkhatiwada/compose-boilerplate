@@ -1,8 +1,8 @@
-package com.devfinity.composeboilerplate.persistance.prefs
+package com.devfinity.composeboilerplate.persistance.prefs.local
 
 import kotlinx.coroutines.flow.Flow
 
-interface SharedPrefsRepository {
+interface SharedPrefsLocal {
     fun isUserLoggedIn(): Flow<Boolean>
     fun getAccessToken(): String
 }
