@@ -9,9 +9,9 @@ class AuthRepositoryImpl @Inject constructor(
     private val local: AuthRepository.Local,
     private val remote: AuthRepository.Remote
 ) : AuthRepository {
-    override suspend fun login(): LoginResponse {
+    override suspend fun login(username: String): LoginResponse {
         return withContext(Dispatchers.IO) {
-            val res = remote.login()
+            val res = remote.login(username)
             local.saveUserInfo(res)
             res
         }

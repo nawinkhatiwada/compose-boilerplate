@@ -7,8 +7,6 @@ data class ForgotPasswordUiState(
     var id: Int? = null,
     var title: String? = null,
     override var isLoading: Boolean? = null,
-    override var data: Any? = null,
-    override var hasError: Boolean? = null,
     override var errorMessage: String? = null,
     override var navigateTo: Screen? = null,
 ) : BaseUiState

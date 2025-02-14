@@ -9,10 +9,9 @@ import javax.inject.Inject
 class AuthRemoteImpl @Inject constructor(
     private val apiService: ApiService
 ) : AuthRepository.Remote {
-    override suspend fun login(): LoginResponse {
+    override suspend fun login(username: String): LoginResponse {
         val requestParams = mapOf(
-            Pair("username", "nkhatiwada"),
-            Pair("password", "mypass")
+            Pair("username", username)
         )
         val baseResponse = apiService.login(requestParams)
         return notNullMapper(baseResponse)

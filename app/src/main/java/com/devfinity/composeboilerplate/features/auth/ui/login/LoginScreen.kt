@@ -5,6 +5,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.devfinity.composeboilerplate.routes.Screen
+import com.devfinity.composeboilerplate.ui.styling.theme.VerticalSpacer40
 import com.devfinity.composeboilerplate.utils.DisposableLaunchEffectNavigator
 
 @Composable
@@ -19,6 +20,7 @@ fun LoginScreen(
     }
 
     Column {
+        VerticalSpacer40()
         Text(
             text = "Login Screen"
         )
@@ -31,6 +33,16 @@ fun LoginScreen(
             )
         }) {
             Text("Go to Forgot Password")
+        }
+
+        Button(onClick = {
+            onTriggeredLoginEvent(
+                LoginUiEvent.OnLoginClicked(
+                    username = "n.k"
+                )
+            )
+        }) {
+            Text("Do Login")
         }
     }
 }

@@ -15,12 +15,16 @@ class LoginViewModel @Inject constructor(
     private val stringProvider: StringProvider
 ) : BaseViewModel<LoginUiState>(LoginUiState()) {
 
-    fun login() {
+    private fun login(event: LoginUiEvent.OnLoginClicked) {
         viewModelScope.launch {
             startLoading()
             try {
-                val response = repository.login()
-                setSuccess(response)
+                val response = repository.login(event.username)
+                updateUiState(
+                    uiState = getSuccessState().copy(
+                        loginResponse = response
+                    )
+                )
             } catch (e: Exception) {
                 setError(e)
             }
@@ -32,16 +36,20 @@ class LoginViewModel @Inject constructor(
             is LoginUiEvent.OnForgotPasswordClicked -> {
                 updateUiState(
                     uiState = uiState.value.copy(
-                        navigateTo = Screen.ForgotPassword(id = event.id, title = event.title)
+                        navigateTo = Screen.ForgotPassword
                     )
                 )
             }
+
+            is LoginUiEvent.OnLoginClicked -> login(event)
         }
     }
 }
 
 sealed class LoginUiEvent {
-    data class OnForgotPasswordClicked(
-        val id: Int, val title: String
+    data object OnForgotPasswordClicked : LoginUiEvent()
+
+    data class OnLoginClicked(
+        val username: String
     ) : LoginUiEvent()
 }

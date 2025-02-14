@@ -16,19 +16,17 @@ abstract class BaseViewModel<UiState : BaseUiState>(initialState: UiState) : Vie
     protected fun startLoading() {
         _uiState.value.isLoading = true
         _uiState.value.errorMessage = null
-        _uiState.value.data = null
     }
 
-    protected fun setSuccess(data: Any) {
+    protected fun getSuccessState(): UiState {
         _uiState.value.isLoading = false
         _uiState.value.errorMessage = null
-        _uiState.value.data = data
+        return _uiState.value
     }
 
     protected fun setError(e: Exception) {
         e.printStackTrace()
         _uiState.value.isLoading = false
         _uiState.value.errorMessage = e.localizedMessage
-        _uiState.value.data = null
     }
 }
