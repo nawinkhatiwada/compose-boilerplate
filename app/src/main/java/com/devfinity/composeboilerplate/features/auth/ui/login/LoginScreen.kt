@@ -25,12 +25,7 @@ fun LoginScreen(
             text = "Login Screen"
         )
         Button(onClick = {
-            onTriggeredLoginEvent(
-                LoginUiEvent.OnForgotPasswordClicked(
-                    id = 1,
-                    title = "Nabin"
-                )
-            )
+            onTriggeredLoginEvent(LoginUiEvent.OnForgotPasswordClicked)
         }) {
             Text("Go to Forgot Password")
         }

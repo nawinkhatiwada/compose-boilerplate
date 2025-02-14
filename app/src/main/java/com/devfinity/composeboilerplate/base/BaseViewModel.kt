@@ -1,6 +1,7 @@
 package com.devfinity.composeboilerplate.base
 
 import androidx.lifecycle.ViewModel
+import com.devfinity.composeboilerplate.errors.parseException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -27,6 +28,6 @@ abstract class BaseViewModel<UiState : BaseUiState>(initialState: UiState) : Vie
     protected fun setError(e: Exception) {
         e.printStackTrace()
         _uiState.value.isLoading = false
-        _uiState.value.errorMessage = e.localizedMessage
+        _uiState.value.errorMessage = parseException(e)
     }
 }

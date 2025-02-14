@@ -21,7 +21,7 @@ fun Context.parseError(e: Exception): String {
     return parseException(e)
 }
 
-private fun parseException(e: Exception): String {
+fun parseException(e: Exception): String {
     return when (e) {
         is FailedResponseException -> e.errorMessage
         is NetworkNotAvailableException -> e.errorMessage
