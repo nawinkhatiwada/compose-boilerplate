@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.devfinity.composeboilerplate.routes.Screen
 import com.devfinity.composeboilerplate.ui.composables.AppToolbar
+import com.devfinity.composeboilerplate.ui.composables.LabelTextField2
 import com.devfinity.composeboilerplate.utils.LaunchErrorMessage
 import com.devfinity.composeboilerplate.utils.LaunchNavigation
 import com.devfinity.composeboilerplate.utils.LaunchToastMessage
@@ -70,6 +71,11 @@ fun LoginScreen(
             }) {
                 Text("Show Toast")
             }
+
+            LabelTextField2(
+                modifier = Modifier,
+                label = "Username",
+                errorMessage = "Cannot be empty")
 
         }
     }

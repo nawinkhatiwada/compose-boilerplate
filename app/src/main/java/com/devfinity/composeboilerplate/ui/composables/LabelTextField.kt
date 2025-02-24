@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devfinity.composeboilerplate.ui.styling.theme.spacing_8
-
+@Deprecated("use LabelTextField2, this will be replaced in future after LabelTextField2 is fully functional")
 @Composable
 fun LabelTextField(
     modifier: Modifier = Modifier,
