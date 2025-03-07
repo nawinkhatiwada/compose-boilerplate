@@ -21,14 +21,24 @@ fun MainNavGraph(
     NavHost(
         navController = navController, startDestination = startDestination
     ) {
+   /*     composable<Screen.Login> {
+            val viewModel: LoginViewModel = hiltViewModel()
+            val uiState by viewModel.viewState.collectAsStateWithLifecycle()
+            LoginScreen(uiState = uiState, onTriggeredLoginEvent = { event ->
+                viewModel.onEvent(event)
+            })
+        }*/
+
         composable<Screen.Login> {
             val viewModel: LoginViewModel = hiltViewModel()
-            val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-            LoginScreen(uiState = uiState, onTriggeredLoginEvent = { event ->
-                viewModel.onTriggeredLoginEvent(event)
-            }, onTriggerNavigationTo = { screen ->
-                navController.navigate(screen)
-            })
+            val uiState by viewModel.viewState.collectAsStateWithLifecycle()
+
+            LoginScreen(
+                uiState = uiState,
+                onTriggeredLoginEvent = { event ->
+                    viewModel.onEvent(event)
+                }
+            )
         }
 
         composable<Screen.ForgotPassword> {

@@ -1,6 +1,5 @@
 package com.devfinity.composeboilerplate.features.auth.ui.login
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -9,30 +8,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.devfinity.composeboilerplate.routes.Screen
 import com.devfinity.composeboilerplate.ui.composables.AppToolbar
-import com.devfinity.composeboilerplate.utils.LaunchErrorMessage
-import com.devfinity.composeboilerplate.utils.LaunchNavigation
-import com.devfinity.composeboilerplate.utils.LaunchToastMessage
 
 @Composable
 fun LoginScreen(
-    uiState: LoginUiState,
-    onTriggeredLoginEvent: (LoginUiEvent) -> Unit,
-    onTriggerNavigationTo: (Screen) -> Unit
+    uiState: LoginScreenContract.ViewState,
+    onTriggeredLoginEvent: (LoginScreenContract.Event) -> Unit
 ) {
     val context = LocalContext.current
-    LaunchNavigation(uiState) { navigateTo ->
-        onTriggerNavigationTo(navigateTo)
-    }
-
+//    LaunchNavigation(uiState) { navigateTo ->
+//        onTriggerNavigationTo(navigateTo)
+//    }
+    /*
     LaunchToastMessage(uiState) { toastMessage ->
         Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
     }
 
     LaunchErrorMessage(uiState) { errorMessage ->
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-    }
+    }*/
 
     Scaffold(topBar = {
         AppToolbar(
@@ -48,16 +42,14 @@ fun LoginScreen(
                 text = "Login Screen"
             )
             Button(onClick = {
-                onTriggeredLoginEvent(LoginUiEvent.OnForgotPasswordClicked)
+                onTriggeredLoginEvent(LoginScreenContract.Event.OnForgotPasswordClicked)
             }) {
                 Text("Go to Forgot Password")
             }
 
             Button(onClick = {
                 onTriggeredLoginEvent(
-                    LoginUiEvent.OnLoginClicked(
-                        username = "n.k"
-                    )
+                    LoginScreenContract.Event.OnLoginClicked(username = "n.k")
                 )
             }) {
                 Text("Do Login")
@@ -65,7 +57,7 @@ fun LoginScreen(
 
             Button(onClick = {
                 onTriggeredLoginEvent(
-                    LoginUiEvent.OnShowToastClicked
+                    LoginScreenContract.Event.OnShowToastClicked
                 )
             }) {
                 Text("Show Toast")

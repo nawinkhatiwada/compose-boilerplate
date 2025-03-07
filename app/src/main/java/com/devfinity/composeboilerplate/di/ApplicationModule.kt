@@ -3,9 +3,10 @@ package com.devfinity.composeboilerplate.di
 import android.app.Application
 import android.content.Context
 import com.devfinity.composeboilerplate.persistance.db.DatabaseManager
+import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefManager
 import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefsLocal
 import com.devfinity.composeboilerplate.persistance.prefs.local.SharedPrefsLocalImpl
-import com.devfinity.composeboilerplate.persistance.prefs.SharedPrefManager
+import com.devfinity.composeboilerplate.utils.NavigationManager
 import com.devfinity.composeboilerplate.utils.helper.stringprovider.StringProvider
 import com.devfinity.composeboilerplate.utils.helper.stringprovider.StringProviderImpl
 import dagger.Module
@@ -44,5 +45,11 @@ class ApplicationModule {
     @Provides
     fun provideDatabaseManager(context: Context): DatabaseManager {
         return DatabaseManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNavigationManager(): NavigationManager {
+        return NavigationManager()
     }
 }

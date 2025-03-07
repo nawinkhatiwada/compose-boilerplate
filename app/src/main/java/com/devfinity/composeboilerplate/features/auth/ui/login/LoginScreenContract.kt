@@ -9,9 +9,9 @@ interface LoginScreenContract {
     interface ViewModel {
         val viewState: StateFlow<ViewState>
 
-        val notification: Flow<String>
+        val notification: Flow<Screen>
 
-        suspend fun onEvent(event: Event)
+        fun onEvent(event: Event)
     }
 
     sealed interface ViewState {

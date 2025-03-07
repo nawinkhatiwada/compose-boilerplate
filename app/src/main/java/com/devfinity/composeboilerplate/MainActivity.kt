@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,29 +20,52 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.devfinity.composeboilerplate.routes.MainNavGraph
-import com.devfinity.composeboilerplate.routes.Screen
 import com.devfinity.composeboilerplate.ui.composables.LabelTextField
 import com.devfinity.composeboilerplate.ui.composables.TextInputColorData
 import com.devfinity.composeboilerplate.ui.composables.TextInputData
 import com.devfinity.composeboilerplate.ui.composables.TextInputFieldIconData
 import com.devfinity.composeboilerplate.ui.composables.TextInputFieldStyleData
 import com.devfinity.composeboilerplate.ui.styling.theme.ComposeBoilerplateTheme
+import com.devfinity.composeboilerplate.utils.NavigationCommand
+import com.devfinity.composeboilerplate.utils.NavigationManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var navigationManager: NavigationManager
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBoilerplateTheme {
-                val navController = rememberNavController()
-                MainNavGraph(
+                /*   val navController = rememberNavController()
+             MainNavGraph(
                     navController = navController,
                     startDestination = Screen.Login
-                )
+                )*/
+
+                val navController = rememberNavController()
+
+                // Observe navigation events
+                LaunchedEffect(Unit) {
+                    lifecycleScope.launch {
+                        navigationManager.commands.collectLatest { command ->
+                            when (command) {
+                                is NavigationCommand.To -> navController.navigate(command.direction)
+                                is NavigationCommand.Back -> navController.popBackStack()
+                            }
+                        }
+                    }
+                }
+
+                MainNavGraph(navController)
             }
         }
     }
