@@ -21,20 +21,12 @@ fun MainNavGraph(
     NavHost(
         navController = navController, startDestination = startDestination
     ) {
-   /*     composable<Screen.Login> {
-            val viewModel: LoginViewModel = hiltViewModel()
-            val uiState by viewModel.viewState.collectAsStateWithLifecycle()
-            LoginScreen(uiState = uiState, onTriggeredLoginEvent = { event ->
-                viewModel.onEvent(event)
-            })
-        }*/
-
         composable<Screen.Login> {
             val viewModel: LoginViewModel = hiltViewModel()
             val uiState by viewModel.viewState.collectAsStateWithLifecycle()
-
             LoginScreen(
                 uiState = uiState,
+                notification = viewModel.notification,
                 onTriggeredLoginEvent = { event ->
                     viewModel.onEvent(event)
                 }

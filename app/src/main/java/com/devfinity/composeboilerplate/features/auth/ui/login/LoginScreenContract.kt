@@ -1,6 +1,5 @@
 package com.devfinity.composeboilerplate.features.auth.ui.login
 
-import com.devfinity.composeboilerplate.routes.Screen
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -9,7 +8,7 @@ interface LoginScreenContract {
     interface ViewModel {
         val viewState: StateFlow<ViewState>
 
-        val notification: Flow<Screen>
+        val notification: Flow<String>
 
         fun onEvent(event: Event)
     }

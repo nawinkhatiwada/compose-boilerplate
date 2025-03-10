@@ -1,16 +1,20 @@
 package com.devfinity.composeboilerplate.features.auth.ui.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.devfinity.composeboilerplate.R
 import com.devfinity.composeboilerplate.features.auth.data.AuthRepository
 import com.devfinity.composeboilerplate.routes.Screen
 import com.devfinity.composeboilerplate.utils.NavigationCommand
 import com.devfinity.composeboilerplate.utils.NavigationManager
 import com.devfinity.composeboilerplate.utils.helper.stringprovider.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,8 +28,11 @@ class LoginViewModel @Inject constructor(
         MutableStateFlow<LoginScreenContract.ViewState>(LoginScreenContract.ViewState.Initial)
     override val viewState: StateFlow<LoginScreenContract.ViewState>
         get() = _viewState
-    override val notification: Flow<Screen>
-        get() = TODO("Not yet implemented")
+
+    private val _notification = MutableSharedFlow<String>(replay = 0, extraBufferCapacity = 1)
+
+    override val notification: SharedFlow<String>
+        get() = _notification
 
     override fun onEvent(event: LoginScreenContract.Event) {
         when (event) {
@@ -38,7 +45,9 @@ class LoginViewModel @Inject constructor(
             }
 
             LoginScreenContract.Event.OnShowToastClicked -> {
-
+                viewModelScope.launch {
+                    _notification.emit(stringProvider.getString(R.string.test_toast_message))
+                }
             }
         }
     }
